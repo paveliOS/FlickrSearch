@@ -29,6 +29,12 @@ final class GalleryViewController: UIViewController {
         return .lightContent
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout.invalidateLayout()
+        contentOffsetHeightRatio = collectionView.contentOffset.y / collectionView.bounds.height
+    }
+    
     @IBAction private func actionSearch(_ sender: UIBarButtonItem) {
         let searchVC = SearchViewController.instantiate(delegate: self)
         searchVC.modalPresentationStyle = .popover
