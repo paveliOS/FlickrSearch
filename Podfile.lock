@@ -1,0 +1,34 @@
+PODS:
+  - Alamofire (4.7.3)
+  - Diff (0.5.3)
+  - Kingfisher (4.10.1)
+  - ProgressHUD (2.60)
+  - SKPhotoBrowser (6.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7)
+  - Diff (from `https://github.com/wokalski/Diff.swift`, branch `swift-4.0`)
+  - Kingfisher (~> 4.10)
+  - ProgressHUD
+  - SKPhotoBrowser
+
+EXTERNAL SOURCES:
+  Diff:
+    :branch: swift-4.0
+    :git: https://github.com/wokalski/Diff.swift
+
+CHECKOUT OPTIONS:
+  Diff:
+    :commit: 674b1adf077bededca10518d2548ae4401bf8025
+    :git: https://github.com/wokalski/Diff.swift
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Diff: f10fccf868e33f7c0e03379a0425aa42def4884f
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  ProgressHUD: 4e4efbaf4f5de8bd32e0c4c3b6644a90ea1a8c3e
+  SKPhotoBrowser: 76eb862685761707b5745fde7762757966565e07
+
+PODFILE CHECKSUM: 9d29e0bbc080f8bc2d8d88e3266eb08e8743e5cf
+
+COCOAPODS: 1.4.0
