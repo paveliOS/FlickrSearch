@@ -1,6 +1,7 @@
 import UIKit
 import Diff
 import ProgressHUD
+import SKPhotoBrowser
 
 protocol GalleryView: class {
     func setData(viewData: GalleryViewData)
@@ -109,6 +110,14 @@ extension GalleryViewController: UICollectionViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         checkIfScrolledToBottom()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell, let image = cell.image {
+            let photo = SKPhoto.photoWithImage(image)
+            let browser = SKPhotoBrowser(originImage: image, photos: [photo], animatedFromView: cell)
+            present(browser, animated: true, completion: nil)
+        }
     }
     
 }
