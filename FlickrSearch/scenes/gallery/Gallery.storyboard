@@ -12,7 +12,7 @@
         <!--Gallery View Controller-->
         <scene sceneID="0mM-Xo-Xbo">
             <objects>
-                <viewController id="o4N-9m-MmD" customClass="GalleryViewController" customModule="Gallery" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="o4N-9m-MmD" customClass="GalleryViewController" customModule="FlickrSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6HD-mT-aph">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Image" id="tlV-8X-1cz" customClass="ImageCell" customModule="Gallery" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Image" id="tlV-8X-1cz" customClass="ImageCell" customModule="FlickrSearch" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="214"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
