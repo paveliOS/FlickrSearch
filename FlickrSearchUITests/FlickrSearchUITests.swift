@@ -1,11 +1,3 @@
-//
-//  FlickrSearchUITests.swift
-//  FlickrSearchUITests
-//
-//  Created by Somebody Someone on 11/10/18.
-//  Copyright © 2018 Somebody Someone. All rights reserved.
-//
-
 import XCTest
 
 class FlickrSearchUITests: XCTestCase {
@@ -21,14 +13,16 @@ class FlickrSearchUITests: XCTestCase {
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testSearchPopoverBehavior() {
+        let app = XCUIApplication()
+        let searchBar = app.tables.searchFields["Search"]
+        XCTAssert(!searchBar.exists)
+        app.navigationBars["Flickr"].buttons["Search"].tap()
+        XCTAssert(searchBar.exists && searchBar.isEnabled)
+        let popoverDismissRegion = app.otherElements["PopoverDismissRegion"]
+        popoverDismissRegion.tap()
+        XCTAssert(!popoverDismissRegion.exists)
     }
 
 }
