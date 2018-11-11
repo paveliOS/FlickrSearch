@@ -5,8 +5,8 @@ protocol GalleryViewPresenter: class {
     var queries: [String] { get }
     func viewDidLoad()
     func userDidScrollToBottom()
-    func onSearchAction(query: String)
-    func onCancelSearchAction()
+    func searchPhotos(with query: String)
+    func cancelSearch()
 }
 
 final class GalleryPresenter {
@@ -16,16 +16,18 @@ final class GalleryPresenter {
     private var imageList: [ImageViewData]
     private var loading: Bool
     private let imageSource: ImageSourceAPI
+    private let persistenceManager: GalleryPersistenceManager
     private var query: String?
     private var page: Int
     private let title: String
     
-    init(view: GalleryView?, router: GalleryRouterProtocol, imageSource: ImageSourceAPI, title: String) {
+    init(view: GalleryView?, router: GalleryRouterProtocol, imageSource: ImageSourceAPI, persistenceManager: GalleryPersistenceManager = UserDefaults.standard, title: String = "Title") {
         self.view = view
         self.router = router
         self.imageList = []
         self.loading = false
         self.imageSource = imageSource
+        self.persistenceManager = persistenceManager
         self.page = 0
         self.title = title
     }
@@ -53,7 +55,7 @@ final class GalleryPresenter {
         loadPhotos(query: nil) { photos in
             let oldList = self.imageList
             self.imageList = photos
-            self.view?.dismissAlert()
+            self.view?.dismissProgress()
             self.view?.scrollCollectionToTop()
             self.view?.updateCollection(oldData: oldList, newData: self.imageList)
         }
@@ -89,14 +91,14 @@ extension GalleryPresenter: GalleryViewPresenter {
         }
     }
     
-    func onSearchAction(query: String) {
-        var searchHistory = UserDefaults.standard.searchQueries
+    func searchPhotos(with query: String) {
+        var searchHistory = persistenceManager.searchQueries
         if let indexOfExistingQuery = searchHistory.firstIndex(of: query) {
             // Remove query from history if it exists
             searchHistory.remove(at: indexOfExistingQuery)
         }
         searchHistory.insert(query, at: 0)
-        UserDefaults.standard.searchQueries = searchHistory
+        persistenceManager.searchQueries = searchHistory
         view?.displayProgress()
         if self.query != query {
             self.query = query
@@ -105,17 +107,16 @@ extension GalleryPresenter: GalleryViewPresenter {
         loadPhotos(query: query) { photos in
             let old = self.imageList
             self.imageList = photos
+            self.view?.dismissProgress()
             if photos.isEmpty {
                 self.view?.displayAlert(message: "No images were found :(")
-            } else {
-                self.view?.dismissAlert()
             }
             self.view?.scrollCollectionToTop()
             self.view?.updateCollection(oldData: old, newData: self.imageList)
         }
     }
     
-    func onCancelSearchAction() {
+    func cancelSearch() {
         query = nil
         page = 0
         loadRecentPhotos()

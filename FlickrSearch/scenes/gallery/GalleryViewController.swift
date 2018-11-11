@@ -9,7 +9,7 @@ protocol GalleryView: class {
     func scrollCollectionToTop()
     func displayProgress()
     func displayAlert(message: String)
-    func dismissAlert()
+    func dismissProgress()
 }
 
 final class GalleryViewController: UIViewController {
@@ -84,7 +84,7 @@ extension GalleryViewController: GalleryView {
         ProgressHUD.showError(message)
     }
     
-    func dismissAlert() {
+    func dismissProgress() {
         ProgressHUD.dismiss()
     }
     
@@ -168,7 +168,7 @@ extension GalleryViewController: SearchViewControllerDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true, completion: nil)
-        presenter.onSearchAction(query: presenter.queries[indexPath.row])
+        presenter.searchPhotos(with: presenter.queries[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -186,12 +186,12 @@ extension GalleryViewController: SearchViewControllerDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
             dismiss(animated: true, completion: nil)
-            presenter.onSearchAction(query: text)
+            presenter.searchPhotos(with: text)
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        presenter.onCancelSearchAction()
+        presenter.cancelSearch()
     }
     
 }

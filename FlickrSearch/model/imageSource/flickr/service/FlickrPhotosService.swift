@@ -8,7 +8,7 @@ final class FlickrPhotosService {
         requestService = HTTPRequestService()
     }
     
-    private func requestPhotos(request: RequestFlickrPhotos, page: Int?, perPage: Int, callback: ((ResponseFlickrPhotos?) -> Void)?) {
+    private func requestPhotos(request: RequestFlickrPhotos, page: Int?, perPage: Int, callback: ((FlickrPhotosResponse?) -> Void)?) {
         request.page = page
         request.per_page = perPage
         requestService.execute(request: request) { response in
@@ -16,7 +16,7 @@ final class FlickrPhotosService {
             case .success(data: let data):
                 do {
                     let decoder = JSONDecoder()
-                    let result = try decoder.decode(ResponseFlickrPhotos.self, from: data)
+                    let result = try decoder.decode(FlickrPhotosResponse.self, from: data)
                     callback?(result)
                 } catch {
                     NSLog("Failed to decode search flickr photos response JSON with error: \(error.localizedDescription)")

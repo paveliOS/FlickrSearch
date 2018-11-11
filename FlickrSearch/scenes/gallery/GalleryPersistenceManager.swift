@@ -1,6 +1,10 @@
 import Foundation
 
-extension UserDefaults {
+protocol GalleryPersistenceManager: class {
+    var searchQueries: [String] { get set }
+}
+
+extension UserDefaults: GalleryPersistenceManager {
     
     var searchQueries: [String] {
         get {

@@ -1,6 +1,6 @@
 import Foundation
 
-final class ResponseFlickrPhotos: Decodable {
+final class FlickrPhotosResponse: Decodable {
     
     let photos: [FlickrPhoto]
     let page: Int
@@ -46,7 +46,7 @@ final class ResponseFlickrPhotos: Decodable {
     
 }
 
-extension ResponseFlickrPhotos: ImageResponse {
+extension FlickrPhotosResponse: ImageResponse {
     
     var images: [Image] {
         return photos
